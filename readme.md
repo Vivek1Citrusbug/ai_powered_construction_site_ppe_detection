@@ -1,0 +1,2 @@
+- Command to run streamlit application
+    -- streamlit run main.py --server.fileWatcherType none
