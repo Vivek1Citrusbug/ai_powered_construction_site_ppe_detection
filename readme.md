@@ -1,5 +1,5 @@
-- Command to run streamlit application
-    -- streamlit run main.py --server.fileWatcherType none
+## Command to run streamlit application
+streamlit run main.py --server.fileWatcherType none
 
 
 # 🚀 Model Comparison: YOLOv8n vs YOLOv8s vs YOLOv8m
@@ -12,45 +12,46 @@ This repository compares the performance of different YOLOv8 models (YOLOv8n, YO
 ## ⚙️ Model Details
 | Model  | Params | Input Size | Dataset | Epochs | Batch Size |
 |--------|--------|-----------|---------|--------|------------|
-| YOLOv8n | 3.2M  | 640x640   | PPE Dataset | 50 | 16 |
-| YOLOv8s | 11.2M | 640x640   | PPE Dataset | 50 | 16 |
-| YOLOv8m | 25.9M | 640x640   | PPE Dataset | 50 | 16 |
+| YOLOv8n | 3.2M  | 640x640   | PPE Dataset | 85 | -1 |
+| YOLOv8s | 11.2M | 640x640   | PPE Dataset | 100 | -1 |
+| YOLOv8m | 25.9M | 640x640   | PPE Dataset | 50 | -1 |
 
+here -1 is used for auto batch selection which will be handled by cuda for effective utilization by GPU.
 ---
 
 ## 📈 Training Performance
 
-### 🔥 **Loss Curves**
-Here’s how the training and validation loss evolved over time for each model:
+### 🔥 **PR Curves for training different models**
+Here’s how the training PR curve evolved over time for each model:
 
 | YOLOv8n | YOLOv8s | YOLOv8m |
 |---------|---------|---------|
-| ![YOLOv8n Loss](assets/yolov8n_loss.png) | ![YOLOv8s Loss](assets/yolov8s_loss.png) | ![YOLOv8m Loss](assets/yolov8m_loss.png) |
+| ![YOLOv8n Loss](models_information/YOLOv8n_without_data_augmentation/yolov8n_v1_train_without_data_augmentation/PR_curve.png) | ![YOLOv8s Loss](models_information/YOLOv8s_without_data_augmentation/yolov8s_v1_train/PR_curve.png) | ![YOLOv8m Loss](models_information/YOLOv8m_without_data_augmentation/yolov8m_v1_train/PR_curve.png) |
 
 ---
 
-### 🏆 **mAP (Mean Average Precision) Scores**
+### 🏆 **mAP (Mean Average Precision) Scores for training**
 | Model  | mAP@50 | mAP@50-95 | Precision | Recall |
 |--------|--------|----------|-----------|--------|
-| YOLOv8n | 83.2% | 61.8% | 82.5% | 79.1% |
-| YOLOv8s | 87.5% | 68.2% | 85.9% | 81.4% |
-| YOLOv8m | 91.2% | 74.5% | 89.8% | 85.7% |
+| YOLOv8n | 81.00% | 50.11% | 88.366% | 73.23% |
+| YOLOv8s | 86.94% | 60.25% | 95.61% | 78.10% |
+| YOLOv8m | 86.02% | 60.11% | 92.76% | 78.76% |
 
 ---
-
+<!-- 
 ### ⏱ **Inference Speed**
 | Model  | FPS (Frames per Second) |
 |--------|----------------------|
 | YOLOv8n | 110 FPS |
 | YOLOv8s | 85 FPS |
-| YOLOv8m | 60 FPS |
+| YOLOv8m | 60 FPS | -->
 
 ---
 
 ## 🔍 Key Observations
-- **YOLOv8n** is the fastest but has lower accuracy.  
-- **YOLOv8m** has the highest accuracy but runs slower.  
-- **YOLOv8s** offers a balance between speed and accuracy.  
+- **YOLOv8n** is the fastest but has lower accuracy. (Trained on 85 epochs) 
+- **YOLOv8m** will have the highest accuracy but runs slower (trained on less number of epoch (50) as running 100 epochs could take much more time).  
+- **YOLOv8s** offers a balance between speed and accuracy.  (Trained on 100 epochs)
 
 ---
 

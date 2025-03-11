@@ -41,16 +41,16 @@ st.sidebar.title("🔍 Select YOLOv8 Model")
 model_choice = st.sidebar.selectbox(
     "Choose a model",
     [
-        "YOLOv8m_with_data_augmentation",
-        "YOLOv8m_without_data_augmentation",
-        "YOLOv8n_without_data_augmentation",
+        "YOLOv8-medium",
+        "YOLOv8-small",
+        "YOLOv8-nano",
     ],
 )
 
 MODEL_PATHS = {
-    "YOLOv8m_with_data_augmentation": "models/Yolov8m_with_aug.pt",
-    "YOLOv8m_without_data_augmentation": "models/Yolov8m_without_aug.pt",
-    "YOLOv8n_without_data_augmentation": "models/Yolov8n_without_aug.pt",
+    "YOLOv8-medium": "models/Yolov8m_without_aug.pt",
+    "YOLOv8-small":"models/Yolov8s_without_aug.pt",
+    "YOLOv8-nano": "models/Yolov8n_without_aug.pt",
 }
 model = YOLO(MODEL_PATHS[model_choice])
 
@@ -65,6 +65,10 @@ use_webcam = st.sidebar.checkbox("📷 Enable Webcam for Live Detection")
 
 
 def live_webcam_detection(model):
+    """
+    Detect webcame and give live object detection of PPE kit.
+    """
+
     st.write("📷 **Live Webcam Object Detection**")
 
     cap = cv2.VideoCapture(0)
@@ -106,6 +110,10 @@ def live_webcam_detection(model):
 
 
 def process_image(image_path, model):
+    """
+    Take image as input and gives bounding box of PPE kit.
+    """
+
     image = cv2.imread(image_path)
     results = model(image)
 
@@ -131,6 +139,10 @@ def process_image(image_path, model):
 
 
 def process_video(video_path, model):
+    """
+    Take video clip as input, gives bounding box for detected PPE kit.
+    """
+    
     cap = cv2.VideoCapture(video_path)
     fourcc = cv2.VideoWriter_fourcc(*"H264")
     fps = int(cap.get(cv2.CAP_PROP_FPS))
