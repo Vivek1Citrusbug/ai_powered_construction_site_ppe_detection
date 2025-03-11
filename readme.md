@@ -1,7 +1,3 @@
-## Command to run streamlit application
-streamlit run main.py --server.fileWatcherType none
-
-
 # 🚀 Model Comparison: YOLOv8n vs YOLOv8s vs YOLOv8m
 
 ## 📌 Project Overview
@@ -16,17 +12,26 @@ This repository compares the performance of different YOLOv8 models (YOLOv8n, YO
 | YOLOv8s | 11.2M | 640x640   | PPE Dataset | 100 | -1 |
 | YOLOv8m | 25.9M | 640x640   | PPE Dataset | 50 | -1 |
 
-here -1 is used for auto batch selection which will be handled by cuda for effective utilization by GPU.
+### here -1 is used for auto batch selection which will be handled by cuda for effective utilization of GPU.
 ---
 
 ## 📈 Training Performance
 
-### 🔥 **PR Curves for training different models**
+### 🔥 **PR Curves of different models during training**
 Here’s how the training PR curve evolved over time for each model:
 
 | YOLOv8n | YOLOv8s | YOLOv8m |
 |---------|---------|---------|
 | ![YOLOv8n Loss](models_information/YOLOv8n_without_data_augmentation/yolov8n_v1_train_without_data_augmentation/PR_curve.png) | ![YOLOv8s Loss](models_information/YOLOv8s_without_data_augmentation/yolov8s_v1_train/PR_curve.png) | ![YOLOv8m Loss](models_information/YOLOv8m_without_data_augmentation/yolov8m_v1_train/PR_curve.png) |
+
+---
+
+### 🔥 **F1 Curves of different models during validation**
+Here’s how the training PR curve evolved over time for each model:
+
+| YOLOv8n | YOLOv8s | YOLOv8m |
+|---------|---------|---------|
+| ![YOLOv8n Loss](models_information/YOLOv8n_without_data_augmentation/yolov8n_v1_train_without_data_augmentation2/F1_curve.png) | ![YOLOv8s Loss](models_information/YOLOv8s_without_data_augmentation/yolov8s_v1_train2/F1_curve.png) | ![YOLOv8m Loss](models_information/YOLOv8m_without_data_augmentation/yolov8m_v1_train2/F1_curve.png) |
 
 ---
 
@@ -60,3 +65,7 @@ Here’s how the training PR curve evolved over time for each model:
 To train any model, use:
 ```bash
 yolo train data=data.yaml model=yolov8n.pt imgsz=640 epochs=50 batch=16
+```
+
+## Command to run streamlit application
+- streamlit run main.py --server.fileWatcherType none
