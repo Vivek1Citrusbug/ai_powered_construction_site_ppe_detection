@@ -5,11 +5,10 @@ import os
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
+import uuid
 
-# 💡 Set Streamlit Page Configuration
 st.set_page_config(page_title="AI-Powered PPE Detection", layout="wide")
 
-# 🔥 Custom CSS for UI Enhancement
 st.markdown(
     """
     <style>
@@ -218,12 +217,15 @@ elif uploaded_files:
             with st.spinner("🛠️ **Processing Video...**"):
                 output_video_path = process_video(temp_path, model)
 
+            key = uuid.uuid4()
+
             with video_cols:
                 st.video(output_video_path)
                 st.download_button(
-                    label="📥 Download Processed Video",
+                    key=key,
+                    label=f"📥 Download Processed Video {key}",
                     data=open(output_video_path, "rb").read(),
-                    file_name="processed_video.mp4",
+                    file_name=f"processed_video_{key}.mp4",
                     mime="video/mp4",
                 )
 else:
