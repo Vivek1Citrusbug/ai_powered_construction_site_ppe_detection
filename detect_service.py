@@ -51,7 +51,9 @@ class PPEDetector:
         """
         Process a video and detect PPE in each frame
         """
+        
         cap = cv2.VideoCapture(video_path)
+        # avc1
         fourcc = cv2.VideoWriter_fourcc("a", "v", "c", "1")
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         width, height = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(
