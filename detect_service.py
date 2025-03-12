@@ -80,3 +80,25 @@ class PPEDetector:
         cap.release()
         out.release()
         return output_path
+    
+    def process_webcam(self):
+        """
+        Process a webcam and detect PPE
+        """
+
+        st.write("📷 **Live Webcam Object Detection**")
+        cap = cv2.VideoCapture(0)
+        stframe = st.empty()
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                st.error("❌ **Failed to access webcam.** Please check your camera settings.")
+                break
+
+            processed_frame = self.detect_objects(frame)
+            processed_frame = cv2.cvtColor(processed_frame, cv2.COLOR_BGR2RGB)
+            stframe.image(processed_frame, channels="RGB")
+
+        cap.release()
+        cv2.destroyAllWindows()
