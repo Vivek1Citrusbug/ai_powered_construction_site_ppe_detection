@@ -4,6 +4,7 @@ import numpy as np
 from ultralytics import YOLO
 import streamlit as st
 
+
 class PPEDetector:
     def __init__(self, model_path):
         """
@@ -16,7 +17,7 @@ class PPEDetector:
         """
         Detect PPE objects in an image frame
         """
-        
+
         results = self.model(frame)
         for result in results:
             for box in result.boxes:
@@ -42,7 +43,7 @@ class PPEDetector:
         """
         Process an image for PPE detection
         """
-        
+
         image = cv2.imread(image_path)
         return self.detect_objects(image)
 
@@ -51,9 +52,11 @@ class PPEDetector:
         Process a video and detect PPE in each frame
         """
         cap = cv2.VideoCapture(video_path)
-        fourcc = cv2.VideoWriter_fourcc('a', 'v', 'c', '1')
+        fourcc = cv2.VideoWriter_fourcc("a", "v", "c", "1")
         fps = int(cap.get(cv2.CAP_PROP_FPS))
-        width, height = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        width, height = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(
+            cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        )
 
         temp_video = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
         output_path = temp_video.name
@@ -71,7 +74,7 @@ class PPEDetector:
             if not ret:
                 break
             processed_frame = self.detect_objects(frame)
-        
+
             out.write(processed_frame)
             frame_count += 1
             progress_bar.progress(frame_count / total_frames)
@@ -79,7 +82,7 @@ class PPEDetector:
         cap.release()
         out.release()
         return output_path
-    
+
     def process_webcam(self):
         """
         Process a webcam and detect PPE
@@ -92,7 +95,9 @@ class PPEDetector:
         while cap.isOpened():
             ret, frame = cap.read()
             if not ret:
-                st.error("❌ **Failed to access webcam.** Please check your camera settings.")
+                st.error(
+                    "❌ **Failed to access webcam.** Please check your camera settings."
+                )
                 break
 
             processed_frame = self.detect_objects(frame)
