@@ -1,11 +1,14 @@
 import streamlit as st
 import cv2
 import tempfile
-import os
 import numpy as np
 from ultralytics import YOLO
 from PIL import Image
 import uuid
+import nest_asyncio
+
+nest_asyncio.apply()
+
 
 st.set_page_config(page_title="AI-Powered PPE Detection", layout="wide")
 
@@ -38,6 +41,7 @@ st.write(
 )
 
 st.sidebar.title("🔍 Select YOLOv8 Model")
+
 model_choice = st.sidebar.selectbox(
     "Choose a model",
     [
@@ -49,7 +53,7 @@ model_choice = st.sidebar.selectbox(
 
 MODEL_PATHS = {
     "YOLOv8-medium": "models/Yolov8m_without_aug.pt",
-    "YOLOv8-small":"models/Yolov8s_without_aug.pt",
+    "YOLOv8-small": "models/Yolov8s_without_aug.pt",
     "YOLOv8-nano": "models/Yolov8n_without_aug.pt",
 }
 model = YOLO(MODEL_PATHS[model_choice])
@@ -142,9 +146,9 @@ def process_video(video_path, model):
     """
     Take video clip as input, gives bounding box for detected PPE kit.
     """
-    
+
     cap = cv2.VideoCapture(video_path)
-    fourcc = cv2.VideoWriter_fourcc(*"H264")
+    fourcc = cv2.VideoWriter_fourcc(*"h264")
     fps = int(cap.get(cv2.CAP_PROP_FPS))
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -233,13 +237,13 @@ elif uploaded_files:
 
             with video_cols:
                 st.video(output_video_path)
-                st.download_button(
-                    key=key,
-                    label=f"📥 Download Processed Video {key}",
-                    data=open(output_video_path, "rb").read(),
-                    file_name=f"processed_video_{key}.mp4",
-                    mime="video/mp4",
-                )
+                # st.download_button(
+                #     key=key,
+                #     label=f"📥 Download Processed Video {key}",
+                #     data=open(output_video_path, "rb").read(),
+                #     file_name=f"processed_video_{key}.mp4",
+                #     mime="video/mp4",
+                # )
 else:
     st.info("📤 **Upload images or videos for object detection.**")
 
