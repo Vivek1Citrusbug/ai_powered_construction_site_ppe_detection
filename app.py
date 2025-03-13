@@ -18,6 +18,13 @@ SUPPORTED_VIDEO_FORMATS = {"mp4"}
 
 
 def convert_to_h264(input_path, output_path):
+    """
+    Converting input file to h264 encoded formate.
+
+    Reason:-
+    streamlit html5 does not support mp4v,h264 codec. We need to manually convert input video file using ffmpeg.
+    """
+
     command = [
         "ffmpeg",
         "-i",
