@@ -32,7 +32,6 @@ def convert_to_h264(input_path, output_path):
     ]
     subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-
 def save_uploaded_file(uploaded_file) -> Path:
     """
     Save uploaded file to a temporary location.
@@ -67,7 +66,6 @@ def process_and_display_video(detector: PPEDetector, video_path: Path):
         output_video_path = detector.process_video(str(video_path))
         converted_video_path = f"dest/{uuid.uuid4()}.mp4"
         convert_to_h264(output_video_path, converted_video_path)
-    
     st.video(str(converted_video_path))
 
 
