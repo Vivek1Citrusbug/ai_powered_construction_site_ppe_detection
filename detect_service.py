@@ -55,8 +55,8 @@ class PPEDetector:
         cap = cv2.VideoCapture(video_path)
         # avc1 - No error 
         # cv2.VideoWriter_
-        fourcc = cv2.VideoWriter_fourcc(*'h264')
-        fourcc = -1
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        # fourcc = -1
         fps = int(cap.get(cv2.CAP_PROP_FPS))
         width, height = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)), int(
             cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
